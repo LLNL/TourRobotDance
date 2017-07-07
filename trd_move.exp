@@ -1,0 +1,109 @@
+#!/usr/bin/expect
+
+#   Copyright 2017 Lawrence Livermore National Laboratory
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+set special_file "/scratch/acsss/trd_keepgoing";
+
+
+proc RandomLSM {beg_lsm no_of_lsms} { 
+    #
+    ##  Calculate a random LSM within the supplied range of LSMs.
+    #
+    ##  Do so by reading a character from /dev/urandom, interpreting it as an 8
+    ##  bit integer via 'binary scan', chopping off the all but the first 8
+    ##  bits to get rid of negative numbers, and reducing the random number into
+    ##  the supplied LSM range via modulus arithmetic.
+    #
+    ##  Yeesh, TCL, ya don't make this easy, do ya?
+    set IF [open "/dev/urandom" "r"];
+    set random [read $IF 1];
+    close $IF;
+
+    binary scan $random c random_int;
+    set random_int [expr ($random_int & 0xff)];
+
+    set lsm [expr (($random_int % $no_of_lsms) + $beg_lsm)];
+
+    return $lsm;
+}
+
+
+
+########
+# main #
+########
+
+
+
+#
+##  Determine the current ACSLS server
+set hpsssvc_rc [catch {exec hpsssvc -i -s acsls}]
+
+#
+##  Is the current host the ACSLS server?
+if { $hpsssvc_rc != 0 } {
+    puts "\n\tThis script only runs on the ACSLS server.\n"; 
+    exit 1;
+}
+
+
+#
+##  Does the file that tells us whether to run exist?
+if { ![file exists $special_file] } {
+    puts "\n\tThe $special_file file doesn't exist.\n"
+    exit 1;
+}
+
+
+#
+##  Get command line args:
+##    - first tape name
+##    - second tape name
+##    - beginning LSM number
+##    - ending LSM number
+set cart1_name [lindex $argv 0];
+set cart2_name [lindex $argv 1];
+set beg_lsm    [lindex $argv 2];
+set end_lsm    [lindex $argv 3];
+set no_of_lsms [expr (($end_lsm - $beg_lsm) + 1)];
+
+
+#
+##  Make things verbose and start up the ACSLS interface
+log_user 1;
+spawn /export/home/ACSSS/bin/cmd_proc -l
+set timeout -1;
+expect "query server"
+expect "ACSSA> "
+
+#
+##  Move the cartridges as long as the keepgoing file exists.
+while { [file exists $special_file] } {
+
+    set lsm [RandomLSM $beg_lsm $no_of_lsms];
+    #
+    ##  Move cartridge one to the LSM.
+    send "move $cart1_name 1,$lsm\r"
+    expect "ACSSA> "
+
+    set lsm [RandomLSM $beg_lsm $no_of_lsms];
+    #
+    ##  Move cartridge one to the LSM.
+    send "move $cart2_name 1,$lsm\r"
+    expect "ACSSA> "
+}
+
+send "logoff\r"
+exit 0;
