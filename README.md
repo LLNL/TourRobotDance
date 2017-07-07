@@ -35,8 +35,8 @@ To stop the robot dance:
 
 ## Known Issues & Limitations *(a.k.a. opportunities for pull requests and community contributions!)*
 
-* Various external dependencies are harcoded into this packages various modules
-* This package relies on a non-OSS LLNL software tool that describes which servers provide which services
+* Various external dependencies are harcoded into this package's various modules
+* This package relies on a non-OSS LLNL software tool named `hpsssvc` that describes which servers provide which services
 * The tape volumes used by this package are hardcoded into the `trd_cron.bash` module
 * The number of tape libraries in use is hardcoded into the `trd_cron.bash` module
 * This package relies on use of [genders](https://github.com/chaos/genders) and a genders schema specific to LLNL
