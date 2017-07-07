@@ -7,7 +7,7 @@
 #
 # All rights reserved.
 # This file is part of Tour Robot Dance. For details, see
-# https://github.com/LLNL/STKRobotDance. Licensed under the
+# https://github.com/LLNL/TourRobotDance. Licensed under the
 # Apache License, Version 2.0 (the “Licensee”); you may not use
 # this file except in compliance with the License. You may
 # obtain a copy of the License at:
