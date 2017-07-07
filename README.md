@@ -29,9 +29,11 @@ To stop the robot dance:
 
     % /path/to/trd_dance.bash --stop
 
-`trd_dance.bash` will place a sentinel file in the filesystem shared by its node and the ACSLS server and log to syslog and HPSS that the robot dance is starting. `trd_cron.bash` will look for the sentinel file and start up many instances of `trd_move.exp`. `trd_move.exp` uses the ACSLS command line processor (`cmd_proc`) to issue the robotic movement commands. When stopping the robot dance, `trd_dance.bash` removes the sentinel file and logs to HPSS and syslog that the robot dance is winding down. `trd_cron.bash` and `trd_move.exp` exit when the sentinel file disappears from the shared filesystem.
+## Internals
 
-## Known Issues & Limitations (a.k.a. opportunities for pull requests and community contributions!)
+`trd_dance.bash` will place a sentinel file in the filesystem shared by its host and the ACSLS server. It will log to syslog and HPSS that the robot dance is starting. `trd_cron.bash` will look for the sentinel file and start up many instances of `trd_move.exp`. `trd_move.exp` uses the ACSLS command line processor (`cmd_proc`) to issue the robotic movement commands. When stopping the robot dance, `trd_dance.bash` removes the sentinel file and logs to HPSS and syslog that the robot dance is winding down. `trd_cron.bash` and `trd_move.exp` exit when the sentinel file disappears from the shared filesystem.
+
+## Known Issues & Limitations *(a.k.a. opportunities for pull requests and community contributions!)*
 
 * Various external dependencies are harcoded into this packages various modules
 * This package relies on a non-OSS LLNL software tool that describes which servers provide which services
