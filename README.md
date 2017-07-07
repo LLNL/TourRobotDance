@@ -12,6 +12,7 @@ So, for tour groups, it's desirable to put the robotic tape libraries into a tou
 
 * Oracle StorageTek SL8500 tape libraries
 * Oracle StorageTek ACSLS library control software
+* [Expect](http://expect.nist.gov/)
 
 ## Quick Start
 
@@ -19,7 +20,7 @@ There are three modules that make up this package:
 
 * `trd_dance.bash`: The user interface. It's meant to able to run on any node, as long as it shares a filesystem (NFS, etc.) with the ACSLS server.
 * `trd_cron.bash`: Run this in cron — frequently, say every five minutes — on the ACSLS server as user *acsss*. This module starts the robot dance, by spawning off individual `trd_move.exp` instances, and awaits the robot dance termination request. This module requires access to a filesystem (NFS, etc.) shared with the node used to run `trd_dance.bash`.
-* `trd_move.exp`: An expect script that is responsible for moving a pair of cartridges around an SL8500 complex to generate robotic movement. Many of instances of this script are run in parallel by `trd_cron.bash` to create the overall robot dance. This module needs access to the same filesystem used by the two bash script modules.
+* `trd_move.exp`: An Expect script that is responsible for moving a pair of cartridges around an SL8500 complex to generate robotic movement. Many of instances of this script are run in parallel by `trd_cron.bash` to create the overall robot dance. This module needs access to the same filesystem used by the two bash script modules.
 
 To run the robot dance:
 
