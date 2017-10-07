@@ -56,83 +56,83 @@ then
     fi
 
     if [[ ${#LSM0_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM0_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM0_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LSM1_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM1_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM1_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LSM2_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM2_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM2_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LSM3_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM3_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM3_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LSM4_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM4_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM4_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LSM5_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM5_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM5_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LSM6_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM6_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM6_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LSM7_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM7_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM7_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LSM8_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM8_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM8_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LSM9_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM9_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM9_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LSM10_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM10_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM10_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LSM11_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM11_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM11_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LSM12_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM12_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM12_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LSM13_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM13_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM13_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LSM14_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM14_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM14_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LSM15_TAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM15_TAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM15_TAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LIB1_RTAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LIB1_RTAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LIB1_RTAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LIB2_RTAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LIB2_RTAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LIB2_RTAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LIB3_RTAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LIB3_RTAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LIB3_RTAPE array is configured correctly in ${config_file}."
         exit 1
     fi
     if [[ ${#LIB4_RTAPE[@]} -ne 2 ]]; then
-        /usr/bin/logger -t $me -p user.warning "Please ensure that LIB4_RTAPE array is confiured correctly in ${config_file}."
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LIB4_RTAPE array is configured correctly in ${config_file}."
         exit 1
     fi
 
