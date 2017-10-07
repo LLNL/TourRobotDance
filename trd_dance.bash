@@ -29,6 +29,11 @@ zone=$(${exec_dir}/nodeattr -v archive_zone)
 
 #
 ##  Preflight checks
+if [[ $zone != "rz" && $zone != "scf" ]]
+then
+    printf "\n\tThis only runs in the RZ or the SCF.\n\n"
+    exit 1
+fi
 if [[ $core != "prodprim" ]]
 then
     printf "\n\tThis only runs on the production core server.\n\n"
