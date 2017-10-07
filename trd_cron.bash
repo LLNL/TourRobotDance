@@ -22,6 +22,7 @@
 
 
 exec_dir="/usr/bin"
+config_file="/etc/trd.conf"
 lock_file="/tmp/trd_cron.running"
 me=$(basename $0)
 special_file="/scratch/acsss/trd_keepgoing"
@@ -32,6 +33,13 @@ then
     /usr/bin/logger -t $me -p user.warning "This script only runs on the ACSLS server."
     exit 1
 fi
+
+if [[ ! -f "${config_file}" ]]; then
+    /usr/bin/logger -t $me -p user.warning "Please ensure that the configuration file exists."
+    exit 1
+fi
+
+. ${config_file}
 
 
 if [[ -e $special_file ]]
@@ -47,43 +55,124 @@ then
         echo "$0 on $(hostname) at $(date)" > $lock_file
     fi
 
+    if [[ ${#LSM0_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM0_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LSM1_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM1_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LSM2_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM2_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LSM3_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM3_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LSM4_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM4_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LSM5_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM5_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LSM6_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM6_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LSM7_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM7_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LSM8_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM8_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LSM9_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM9_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LSM10_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM10_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LSM11_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM11_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LSM12_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM12_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LSM13_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM13_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LSM14_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM14_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LSM15_TAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LSM15_TAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LIB1_RTAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LIB1_RTAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LIB2_RTAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LIB2_RTAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LIB3_RTAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LIB3_RTAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+    if [[ ${#LIB4_RTAPE[@]} -ne 2 ]]; then
+        /usr/bin/logger -t $me -p user.warning "Please ensure that LIB4_RTAPE array is configured correctly in ${config_file}."
+        exit 1
+    fi
+
     #
     ##  Move the specified cartridges around within the specified LSMs.
     ##  For example, the first line will cause two tape cartridges
     ##  to move around, at random, within LSM 0.
     # LIB 1
-    ${exec_dir}/trd_move Z2X080  Z2X081  0  0  &
-    ${exec_dir}/trd_move Z2X082  Z2X083  1  1  &
-    ${exec_dir}/trd_move Z2X084  Z2X085  2  2  &
-    ${exec_dir}/trd_move Z2X086  Z2X087  3  3  &
+    ${exec_dir}/trd_move ${LSM0_TAPE[0]}  ${LSM0_TAPE[1]}  0  0  &
+    ${exec_dir}/trd_move ${LSM1_TAPE[0]}  ${LSM1_TAPE[1]}  1  1  &
+    ${exec_dir}/trd_move ${LSM2_TAPE[0]}  ${LSM2_TAPE[1]}  2  2  &
+    ${exec_dir}/trd_move ${LSM3_TAPE[0]}  ${LSM3_TAPE[1]}  3  3  &
     # LIB 2
-    ${exec_dir}/trd_move Z2X088  Z2X089  4  4  &
-    ${exec_dir}/trd_move Z2X090  Z2X091  5  5  &
-    ${exec_dir}/trd_move Z2X092  Z2X093  6  6  &
-    ${exec_dir}/trd_move Z2X094  Z2X095  7  7  &
+    ${exec_dir}/trd_move ${LSM4_TAPE[0]}  ${LSM4_TAPE[1]}  4  4  &
+    ${exec_dir}/trd_move ${LSM5_TAPE[0]}  ${LSM5_TAPE[1]}  5  5  &
+    ${exec_dir}/trd_move ${LSM6_TAPE[0]}  ${LSM6_TAPE[1]}  6  6  &
+    ${exec_dir}/trd_move ${LSM7_TAPE[0]}  ${LSM7_TAPE[1]}  7  7  &
     # LIB 3
-    ${exec_dir}/trd_move Z2X096  Z2X097  8  8  &
-    ${exec_dir}/trd_move Z2X098  Z2X099  9  9  &
-    ${exec_dir}/trd_move Z2X100  Z2X101  10 10 &
-    ${exec_dir}/trd_move Z2X102  Z2X103  11 11 &
+    ${exec_dir}/trd_move ${LSM8_TAPE[0]}  ${LSM8_TAPE[1]}  8  8  &
+    ${exec_dir}/trd_move ${LSM9_TAPE[0]}  ${LSM9_TAPE[1]}  9  9  &
+    ${exec_dir}/trd_move ${LSM10_TAPE[0]} ${LSM10_TAPE[1]} 10 10 &
+    ${exec_dir}/trd_move ${LSM11_TAPE[0]} ${LSM11_TAPE[1]} 11 11 &
     # LIB 4
-    ${exec_dir}/trd_move Z2X104  Z2X105  12 12 &
-    ${exec_dir}/trd_move Z2X106  Z2X107  13 13 &
-    ${exec_dir}/trd_move Z2X108  Z2X109  14 14 &
-    ${exec_dir}/trd_move Z2X110  Z2X111  15 15 &
+    ${exec_dir}/trd_move ${LSM12_TAPE[0]} ${LSM12_TAPE[1]} 12 12 &
+    ${exec_dir}/trd_move ${LSM13_TAPE[0]} ${LSM13_TAPE[1]} 13 13 &
+    ${exec_dir}/trd_move ${LSM14_TAPE[0]} ${LSM14_TAPE[1]} 14 14 &
+    ${exec_dir}/trd_move ${LSM15_TAPE[0]} ${LSM15_TAPE[1]} 15 15 &
 
     #
     ##  Move the specified cartridges around within a library.
     ##  For example, the first line will cause Z2X184 & Z2X185
     ##  to move around, at random, within LIB 1.
     # Elevator Move LIB 1
-    ${exec_dir}/trd_move Z2X112  Z2X113  0  3  &
+    ${exec_dir}/trd_move ${LIB1_RTAPE[0]} ${LIB1_RTAPE[1]}  0  3  &
     # Elevator Move LIB 2
-    ${exec_dir}/trd_move Z2X114  Z2X115  4  7  &
+    ${exec_dir}/trd_move ${LIB2_RTAPE[0]} ${LIB2_RTAPE[1]}  4  7  &
     # Elevator Move LIB 3
-    ${exec_dir}/trd_move Z2X116  Z2X117  8  11 &
+    ${exec_dir}/trd_move ${LIB3_RTAPE[0]} ${LIB3_RTAPE[1]}  8  11 &
     # Elevator Move LIB 4
-    ${exec_dir}/trd_move Z2X118  Z2X119  12 15 &
+    ${exec_dir}/trd_move ${LIB4_RTAPE[0]} ${LIB4_RTAPE[1]}  12 15 &
 
     #
     ##  Keep running as long as the 'child process' move scripts are running.
